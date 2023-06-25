@@ -38,12 +38,12 @@ function App() {
 
       //useEffect: used when you want to fetch data. for example, make an API request
      //this basically update the value from setCredit into credit with []
-      useEffect(() =>{handleCrd()}, [])
-      useEffect(() =>{handleDbt()}, [])
+      useEffect(() =>{handleCrd()}, []);
+      useEffect(() =>{handleDbt()}, []);
 
       const accBal = () => {
         setAccountBalance(credit-debit)
-      }
+      };
    
       useEffect(() => {accBal()}, [credit,debit]);
 
@@ -76,8 +76,8 @@ function App() {
         {/* Routes help link vars created to the child routers*/}
         <Routes>
           <Route path="/" element={<Home credit={credit} debit={debit} balance={accBal}/>} />
-          <Route path="/Credit" element={<Credit credit={credit} debit={debit}/>} />
-          <Route path="/Debit" element={<Debit debit={debit} credit={credit}/>} />
+          <Route path="/Credit" element={<Credit credit={credit} setCredit={setCredit} />} />
+          <Route path="/Debit" element={<Debit debit={debit} setDebit={setDebit}/>} />
         </Routes>
       </div>
       <div>

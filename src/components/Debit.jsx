@@ -1,6 +1,6 @@
 import React, { useState } from "react"; 
 
-const Debit=({debit, setDebit, accountBalance}) => {
+const Debit=({debit, setDebit }) => {
     const [inputDes, setInputDes] = useState('');
     const[inputAmt, setInputAmt] = useState(0);
 
@@ -15,10 +15,11 @@ const Debit=({debit, setDebit, accountBalance}) => {
     function updateAmt(event){
         event.preventDefault();
         //check to make sure there are no empty strings
-        let updatedAmt ={       
-        "description": inputDes,
-        "amount": inputAmt
-       // debit: debit+inputAmt
+        if (inputAmt !== '') {
+          const updatedAmt = parseInt(inputAmt);
+          setInputDes('');
+          setInputAmt(0);
+          setDebit(debit + updatedAmt);
         }
     }
 
@@ -27,9 +28,9 @@ const Debit=({debit, setDebit, accountBalance}) => {
     <div id = 'debit'>
      <h1>Add Debit</h1>
      <p>Description</p>
-     <input type="text" value={inputDes} onChange={handleInputDes} />
+     <input type="text" value={inputDes} onChange={handleInputDes} placeholder="Description" />
      <p>Add Amount:</p>
-      <input type="number" value={inputAmt} onChange={handleInputAmt} />
+      <input type="number" value={inputAmt} onChange={handleInputAmt} placeholder="0" />
       <button onClick={updateAmt}>Submit</button>
      <h1>Current Debit:</h1>
         <h3>$ {debit}</h3>
